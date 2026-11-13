@@ -12,7 +12,9 @@ Orbit Health is a local, desktop-style prototype that helps a crew member log a 
 
 ## Demo
 
-The app runs locally so reviewers can interact with the dashboard and save a check-in. Follow the [quick start](#quick-start) to launch it. For a short presentation, see the [demo walkthrough](demo/DEMO_WALKTHROUGH.md), which is designed to fit a 30-second recording or a brief live demonstration.
+- **[Open the public interactive demo](https://veenasahithi2004.github.io/orbit-health-astronaut-monitor/)** — view the dashboard in a browser without downloading the project. It uses fictional sample data; check-ins are temporary in that browser tab and are not uploaded or saved.
+- **[View the demo walkthrough](demo/DEMO_WALKTHROUGH.md)** — a short guide to the main dashboard features.
+- To run the full local app and keep check-ins in the local CSV, follow the [quick start](#quick-start).
 
 ## What you can do
 
