@@ -1,0 +1,7 @@
+{
+  "name": "orbit-health-astronaut-monitor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A local demo dashboard for astronaut wellness check-ins and mission context",
+  "scripts": { "start": "node backend/health_records_api.js" }
+}

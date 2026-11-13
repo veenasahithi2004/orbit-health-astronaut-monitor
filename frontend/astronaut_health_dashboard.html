@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080e19"><title>Orbit Health | Crew monitor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/astronaut_health_dashboard.css">
+</head>
+<body>
+<canvas id="galaxy-canvas" aria-hidden="true"></canvas>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="#"><span class="brand-mark">✳</span><span>orbit<span class="brand-muted">/health</span></span></a>
+    <div class="mission-label">MISSION CONTROL</div>
+    <div class="mission-card"><div class="mission-icon">⌁</div><div><b>Artemis · Demo</b><small>Transit phase <span class="live-dot"></span></small></div></div>
+    <nav><div class="nav-label">WORKSPACE</div><a class="nav-item active" href="#overview"><span>◫</span> Overview</a><a class="nav-item" href="#trends"><span>⌁</span> Health trends</a><a class="nav-item" href="#mission-context"><span>◉</span> Mission context</a><a class="nav-item" href="#log"><span>＋</span> Log a reading</a></nav>
+    <div class="sidebar-bottom"><div class="earth-chip"><span class="earth">◉</span><div><b>Earth link</b><small>Signal established</small></div><span class="signal">●●●</span></div><div class="side-foot">CREW WELLNESS SYSTEM <span>v0.1 · PROTOTYPE</span></div></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div class="breadcrumb">CREW HEALTH <span>/</span> OVERVIEW</div><div class="top-meta"><span class="demo-pill"><span></span> SIMULATION DATA</span><span class="top-date" id="today"></span><div class="avatar">C</div></div></header>
+    <div class="content">
+      <section class="welcome" id="overview"><div><div class="eyebrow"><span class="eyebrow-line"></span> PERSONAL HEALTH SNAPSHOT</div><h1>Your health, <em>in orbit.</em></h1><p>A clear view of your daily signals. Check in, spot changes, and take your next step.</p></div><label class="crew-select"><span>CREW MEMBER</span><select id="astronaut-select"></select><span class="select-arrow">⌄</span></label></section>
+      <section class="metrics-grid" id="metrics"></section>
+      <section class="middle-grid" id="trends"><div class="panel trend-panel"><div class="panel-heading"><div><div class="section-kicker">PERSONAL HISTORY · LATEST 12 CHECK-INS</div><h2>Health trends</h2></div><div class="legend"><span><i class="legend-dot blue"></i> Heart rate</span><span><i class="legend-dot violet"></i> Sleep</span></div></div><div class="baseline-row" id="baseline-summary"></div><div class="chart-wrap"><div class="y-labels"><span>100</span><span>75</span><span>50</span></div><svg id="trend-chart" viewBox="0 0 680 190" preserveAspectRatio="none" role="img" aria-label="Personal heart rate and sleep trends"></svg><div class="x-labels" id="x-labels"></div></div><div class="chart-caption"><span>HEART RATE · BPM</span><span>Dashed sleep line uses a separate 0–10 hour scale</span></div></div>
+      <div class="panel insight-panel"><div class="section-kicker">CREW CHECK-IN</div><h2>Today’s readout</h2><div id="insight" class="insight-content"></div><div class="insight-foot"><span class="spark">✳</span>Patterns are personal. Notice what feels different.</div></div></section>
+      <section class="research-grid" id="mission-context"><div class="panel context-panel"><div class="panel-heading"><div><div class="section-kicker">MISSION CONTEXT</div><h2>Conditions around the check-in</h2></div><span class="context-mark">⌁</span></div><div id="context-summary" class="context-summary"></div><p class="context-explainer">Context can help explain patterns. Radiation readings describe the environment and are not a diagnosis or a measure of individual health effect.</p></div></section>
+      <section class="bottom-grid"><div class="panel log-panel" id="log"><div class="panel-heading"><div><div class="section-kicker">DAILY CHECK-IN</div><h2>Log a reading</h2></div><span class="tiny-label">CORE READINGS REQUIRED · CONTEXT OPTIONAL</span></div><form id="reading-form"><div class="form-grid">
+        <label>Heart rate <span>BPM</span><input name="heart_rate_bpm" type="number" min="30" max="220" value="72" required></label>
+        <label>Blood pressure <span>MMHG</span><div class="bp-input"><input name="blood_pressure_systolic_mmhg" type="number" min="50" max="260" value="118" aria-label="Systolic blood pressure" required><i>/</i><input name="blood_pressure_diastolic_mmhg" type="number" min="30" max="160" value="76" aria-label="Diastolic blood pressure" required></div></label>
+        <label>Blood glucose <span>MG/DL</span><input name="blood_glucose_mg_dl" type="number" min="20" max="600" value="92" required></label>
+        <label>Body temperature <span>°C</span><input name="body_temperature_c" type="number" min="30" max="45" step="0.1" value="36.7" required></label>
+        <label>Sleep last night <span>HOURS</span><input name="sleep_hours" type="number" min="0" max="24" step="0.1" value="7.5" required></label>
+        <label>How’s your mood? <span>SELF-REPORT</span><select name="mood"><option value="positive">Positive</option><option value="neutral">Neutral</option><option value="low">Low</option></select></label>
+        <label>Mission gravity phase <span>OPTIONAL CONTEXT</span><select name="gravity_phase"><option value="not recorded">Not recorded</option><option value="microgravity">Microgravity</option><option value="lunar">Lunar gravity</option><option value="martian">Martian gravity</option><option value="transition">Gravity transition</option></select></label>
+        <label>Radiation dose <span>MSV · OPTIONAL SENSOR VALUE</span><input name="radiation_dose_msv" type="number" min="0" max="1000" step="0.001" placeholder="e.g. 0.015"></label>
+        <label>Exercise completed <span>MINUTES · OPTIONAL</span><input name="exercise_minutes" type="number" min="0" max="600" placeholder="e.g. 30"></label>
+        <label>Symptoms <span>OPTIONAL · UP TO 240 CHARACTERS</span><input name="symptoms" type="text" maxlength="240" placeholder="Dizziness, headache, none…"></label>
+        <label>Crew note <span>OPTIONAL · UP TO 500 CHARACTERS</span><input name="crew_note" type="text" maxlength="500" placeholder="Context you want to remember…"></label>
+      </div><div class="form-actions"><div class="form-note"><span>i</span> Use your mission-approved measurement procedure.</div><button type="submit" class="submit-btn">Save check-in <span>↗</span></button></div></form><div id="form-message" role="status"></div></div>
+      <div class="panel history-panel"><div class="panel-heading"><div><div class="section-kicker">RECENT ACTIVITY</div><h2>Latest readings</h2></div><span class="history-icon">↗</span></div><div class="history-list" id="history-list"></div><div class="history-note">Showing most recent check-ins for this crew member.</div></div></section>
+      <footer><span>ORBIT / HEALTH <i>·</i> CREW WELLNESS PROTOTYPE</span><span>FOR DEMONSTRATION ONLY · FOLLOW FLIGHT MEDICAL PROTOCOLS</span></footer>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast" role="status"></div><script src="/astronaut_health_dashboard.js"></script>
+</body></html>
+
+
+

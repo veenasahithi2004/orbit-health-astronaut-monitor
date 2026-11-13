@@ -1,0 +1,6 @@
+cff-version: 1.2.0
+message: "Please cite this as a prototype and cite the sources in data/nasa_csa_research_references.md."
+title: "Orbit Health: Crew Wellness Dashboard Prototype"
+type: software
+date-released: 2026-11-13
+license: MIT
